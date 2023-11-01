@@ -1,20 +1,31 @@
+const contentDiv = document.querySelector('#information');
+// contentDiv.appendChild(London().Content('Paris'))
+
 function openCity(evt, cityName) {
     // Declare all variables
-    var i, tabcontent, tablinks;
-  
-    // Get all elements with class="tabcontent" and hide them
-    tabcontent = document.getElementsByClassName("tabcontent");
-    for (i = 0; i < tabcontent.length; i++) {
-      tabcontent[i].style.display = "none";
-    }
-  
-    // Get all elements with class="tablinks" and remove the class "active"
-    tablinks = document.getElementsByClassName("tablinks");
-    for (i = 0; i < tablinks.length; i++) {
-      tablinks[i].className = tablinks[i].className.replace(" active", "");
-    }
-  
-    // Show the current tab, and add an "active" class to the button that opened the tab
-    document.getElementById(cityName).style.display = "block";
-    evt.currentTarget.className += " active";
+    let i
+    contentDiv.innerHTML = ''
+    contentDiv.appendChild(createContent().content(cityName));
+
   }
+
+  function createContent () {
+    return{
+      content: function (cityName) {
+        let container = document.createElement('div');
+        container.classList.add('contentContainer');
+
+        let heading = document.createElement('h3');
+        heading.classList.add('heading');
+        heading.innerHTML += cityName;
+        container.appendChild(heading);
+        
+        let mainContent = document.createElement('p');
+        mainContent.innerHTML += `This is some example Text about ${cityName}. ${cityName} is a really nice City!`;
+        container.appendChild(mainContent);
+
+        return container;
+      }
+    }
+  }
+
